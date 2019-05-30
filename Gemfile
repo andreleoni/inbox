@@ -5,6 +5,8 @@ ruby '2.5.1'
 
 gem 'rails', '~> 5.2.3'
 
+gem 'aws-sdk'
+
 gem 'pg'
 
 gem 'puma', '~> 3.11'

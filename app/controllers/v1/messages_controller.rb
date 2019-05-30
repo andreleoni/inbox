@@ -4,6 +4,8 @@ class V1::MessagesController < ApplicationController
   end
 
   def show
+    # Marca como lida se não tiver lida ainda
+
     { url: "url" }
   end
 
@@ -11,6 +13,7 @@ class V1::MessagesController < ApplicationController
   end
 
   def update
+    # Marca como lida
   end
 
   def destroy

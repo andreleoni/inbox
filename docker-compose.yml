@@ -6,6 +6,9 @@ services:
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
 
+  dynamodb:
+    image: amazon/dynamodb-local
+
   web:
     build: .
     command: /bin/bash
@@ -16,3 +19,4 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - dynamodb
