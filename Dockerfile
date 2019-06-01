@@ -1,6 +1,10 @@
-FROM ruby:2.5.1
+FROM ruby:2.5.1-alpine3.7
 
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+RUN apk --update add nodejs postgresql-dev libxml2
+
+RUN apk --update add --virtual build-dependencies make g++
+
+RUN apk add --no-cache bash
 
 RUN mkdir /inbox
 
@@ -17,5 +21,7 @@ RUN bundle install
 COPY . /inbox
 
 EXPOSE 3000
+
+COPY docker-entrypoint.sh /usr/local/bin
 
 ENTRYPOINT ["docker-entrypoint.sh"]

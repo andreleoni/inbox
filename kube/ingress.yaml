@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: inbox-ms-ing
+spec:
+  rules:
+    - host: inbox-prod.local
+      http:
+        paths:
+          - backend:
+              serviceName: rails
+              servicePort: 3000
+            path: /

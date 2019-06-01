@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rails
+  labels:
+    app: inbox-ms
+spec:
+  ports:
+    - port: 3000
+  selector:
+    app: inbox-ms
+    tier: rails
+
+---
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: rails
+spec:
+  replicas: 1
+  selector:
+    app: inbox-ms
+    tier: rails
+  template:
+    metadata:
+      name: rails
+      labels:
+        app: inbox-ms
+        tier: rails
+    spec:
+      containers:
+      - name: rails
+        image: andreleoni/inbox-ms:latest
+        args: ["rails s -p 3000 -b 0.0.0.0"]
+        env:
+        - name: DATABASE_URL
+          value: "postgres"
+        - name: DATABASE_NAME
+          value: "inbox_production"
+        - name: DATABASE_PORT
+          value: "5432"
+        - name: DATABASE_USER
+          valueFrom:
+            secretKeyRef:
+              name: "db-user"
+              key: "username"
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: "db-user-pass"
+              key: "password"
+        - name: RAILS_APP
+          value: "production"
+        - name: RAILS_LOG_TO_STDOUT
+          value: "true"
+        - name: RAILS_SERVE_STATIC_ASSETS
+          value: "true"
+        - name: REDIS_URL
+          value: "redis"
+        - name: REDIS_PORT
+          value: "6379"
+        - name: SECRET_KEY_BASE
+          valueFrom:
+            secretKeyRef:
+              name: "secret-key-base"
+              key: "secret-key-base"
+        ports:
+        - containerPort: 3000

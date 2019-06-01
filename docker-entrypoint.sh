@@ -10,8 +10,8 @@ echo "Waiting for Postgres to start..."
 while ! nc -z db 5432; do sleep 0.1; done
 echo "Postgres is up"
 
-echo "Waiting for Redis to start..."
-while ! nc -z redis 6379; do sleep 0.1; done
-echo "Redis is up - execuring command"
+# echo "Waiting for Redis to start..."
+# while ! nc -z redis 6379; do sleep 0.1; done
+# echo "Redis is up - execuring command"
 
 exec bundle exec "$@"
