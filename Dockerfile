@@ -17,3 +17,5 @@ RUN bundle install
 COPY . /inbox
 
 EXPOSE 3000
+
+ENTRYPOINT ["docker-entrypoint.sh"]
