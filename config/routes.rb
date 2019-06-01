@@ -3,4 +3,6 @@ Rails.application.routes.draw do
     resources :messages
     resources :counters, only: [:index]
   end
+
+  root to: proc { [404, {}, ["Not found."]] }
 end
