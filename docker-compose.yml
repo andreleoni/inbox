@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  db:
+  postgres:
     image: postgres
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
@@ -19,5 +19,5 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - db
+      - postgres
       - dynamodb
