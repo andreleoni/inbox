@@ -17,4 +17,5 @@ minikube addons enable ingress
 
 kubectl create -f kube/ingress.yaml
 
-kubectl -n kube-system get po -w
+## ENables autoscaling
+# kubectl create -f kube/autoscaling.yaml

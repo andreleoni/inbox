@@ -56,3 +56,7 @@ $ kubectl -n kube-system get po -w
 ## Scaling manually
 
 To scale with kubernetes, you could edit the replicas of deployment and increase the number of "replicas", so run the command `kubectl apply -f kube/deployment.yaml`
+
+## Atualizar deploy
+
+`kubectl apply -f kube/deployment.yaml`
